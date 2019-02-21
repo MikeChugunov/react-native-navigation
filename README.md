@@ -14,14 +14,21 @@ Wix currently moved to [v2](https://github.com/wix/react-native-navigation/tree/
 * New to RNN? We recommend you start with [v2](https://github.com/wix/react-native-navigation/tree/v2).
 * Already using v1? Then you in right place.
 
-<br><br>Latest stable version is `1.1.x` and is published to npm under tag `latest`.
+## Newest version 1.2.1 [Changelog](https://github.com/mikechugunov/react-native-navigation/blob/master/CHANGELOG.md)
+* Updated libraries and android gradle.
+* Android now using selectedIcon for bottom tabs
+
+<br><br>Latest stable version is `1.2.x` and is published to npm under tag `latest`.
 Version 1.1.483 supports react-native >= 0.48 up to react-native 0.56
 Version 1.1.484 supports react-native >= 0.57 
 >⚠️Since we're focusing our efforts on v2, we are not accepting pull requests for v1 and are not addresing issues for v1.
 
 ### tl;dr
 
-React Native Navigation provides 100% native platform navigation on both iOS and Android for React Native apps. The JavaScript API is simple and cross-platform - just install it in your app and give your users the native feel they deserve. Using redux? No problem: React Native Navigation comes with optional redux support out of the box. Ready to get started? Check out the [docs](https://wix.github.io/react-native-navigation/).
+React Native Navigation provides 100% native platform navigation on both iOS and Android for React Native apps.
+The JavaScript API is simple and cross-platform - just install it in your app and give your users the native feel they deserve.
+Using redux? No problem: React Native Navigation comes with optional redux support out of the box. Ready to get started?
+Check out the [docs](https://mikechugunov.github.io/react-native-navigation/#/).
 
 ### Real world examples
 

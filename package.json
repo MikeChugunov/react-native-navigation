@@ -1,6 +1,6 @@
 {
   "name": "react-native-navigation-legacy",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React Native Navigation - truly native navigation for iOS and Android",
   "license": "MIT",
   "nativePackage": true,
