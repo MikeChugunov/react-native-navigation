@@ -1,5 +1,5 @@
 {
-  "name": "react-native-navigation",
+  "name": "react-native-navigation-legacy",
   "version": "1.2.0",
   "description": "React Native Navigation - truly native navigation for iOS and Android",
   "license": "MIT",
@@ -9,13 +9,13 @@
     "registry": "https://registry.npmjs.org/"
   },
   "bugs": {
-    "url": "https://github.com/wix/react-native-navigation/issues"
+    "url": "https://github.com/mikechugunov/react-native-navigation/issues"
   },
-  "homepage": "https://github.com/wix/react-native-navigation",
-  "readme": "https://github.com/wix/react-native-navigation#readme",
+  "homepage": "https://github.com/mikechugunov/react-native-navigation",
+  "readme": "https://github.com/mikechugunov/react-native-navigation#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wix/react-native-navigation.git"
+    "url": "https://github.com/mikechugunov/react-native-navigation.git"
   },
   "main": "src/index.js",
   "scripts": {
