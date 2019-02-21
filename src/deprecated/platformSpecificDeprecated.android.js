@@ -30,9 +30,9 @@ async function startSingleScreenApp(params) {
   params.overrideBackPress = params.screen.overrideBackPress;
   params.animateShow = convertAnimationType(params.animationType);
   params.appStyle = convertStyleParams(params.appStyle);
-    if (params.appStyle) {
-      params.appStyle.orientation = getOrientation(params);
-    }
+  if (params.appStyle) {
+    params.appStyle.orientation = getOrientation(params);
+  }
 
   return await newPlatformSpecific.startApp(params);
 }
@@ -245,7 +245,7 @@ function convertStyleParams(originalStyleObject) {
       ret.collapsingToolBarImage = originalStyleObject.collapsingToolBarImage;
     }
 
-    const collapsingToolBarImage = resolveAssetSource(originalStyleObject.collapsingToolBarImage)
+    const collapsingToolBarImage = resolveAssetSource(originalStyleObject.collapsingToolBarImage);
     if (collapsingToolBarImage) {
       ret.collapsingToolBarImage = collapsingToolBarImage.uri;
     }
@@ -290,7 +290,7 @@ function convertDrawerParamsToSideMenuParams(drawerParams) {
     } else {
       result[key] = null;
     }
-  })
+  });
 
   return result;
 }
@@ -317,7 +317,7 @@ async function startTabBasedApp(params) {
   params.tabs.forEach(function(tab, idx) {
     if (tab.components) {
       const components = tab.components;
-      let screen = createBottomTabScreen(tab, idx, params)
+      let screen = createBottomTabScreen(tab, idx, params);
       const {label, icon} = screen;
       screen.screens = components.map(c => createBottomTabScreen({...c, icon, label}, idx, params));
       screen.screens.map((s, i) => addTitleBarBackButtonIfNeeded(s));
@@ -365,6 +365,12 @@ function addTabIcon(tab) {
     const icon = resolveAssetSource(tab.icon);
     if (icon) {
       tab.icon = icon.uri;
+    }
+  }
+  if (tab.selectedIcon) {
+    const selectedIcon = resolveAssetSource(tab.selectedIcon);
+    if (selectedIcon) {
+      tab.selectedIcon = selectedIcon.uri;
     }
   }
 
@@ -511,7 +517,6 @@ function showModal(params) {
   addTitleBarBackButtonIfNeeded(params);
   addNavigationStyleParams(params);
 
-
   /*
    * adapt to new API
    */
@@ -570,7 +575,9 @@ function showInAppNotification(params) {
   addNavigatorParams(params.navigationParams);
 
   params.autoDismissTimerSec = params.autoDismissTimerSec || 5;
-  if (params.autoDismiss === false) delete params.autoDismissTimerSec;
+  if (params.autoDismiss === false) {
+    delete params.autoDismissTimerSec;
+  }
 
   newPlatformSpecific.showInAppNotification(params);
 }
@@ -647,7 +654,7 @@ function getFab(screen) {
   if (fab === null || fab === undefined) {
     return;
   }
-  if (Object.keys(fab).length === 0 ) {
+  if (Object.keys(fab).length === 0) {
     return {};
   }
 
@@ -676,10 +683,10 @@ function getFab(screen) {
     _.forEach(fab.actions, (action) => {
       action.icon = resolveAssetSource(action.icon).uri;
       if (action.backgroundColor) {
-        action.backgroundColor = processColor(action.backgroundColor)
+        action.backgroundColor = processColor(action.backgroundColor);
       }
       if (action.iconColor) {
-        action.iconColor = processColor(action.iconColor)
+        action.iconColor = processColor(action.iconColor);
       }
       return action;
     });
@@ -699,7 +706,7 @@ function addTitleBarBackButtonIfNeeded(screen) {
   if (!leftButton) {
     screen.leftButton = {
       id: 'back'
-    }
+    };
   }
 }
 
@@ -736,7 +743,7 @@ function getRightButtons(screen) {
   if (screen.navigatorButtons && screen.navigatorButtons.rightButtons) {
     return screen.navigatorButtons.rightButtons;
   } else if (screen.rightButtons) {
-    return screen.rightButtons
+    return screen.rightButtons;
   }
 
   const Screen = Navigation.getRegisteredScreen(screen.screen);

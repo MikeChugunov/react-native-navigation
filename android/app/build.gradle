@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply from: '../prepare-robolectric.gradle'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -45,20 +45,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    compile 'com.android.support:design:27.1.1'
-    compile "com.android.support:appcompat-v7:27.1.1"
+    implementation 'com.android.support:design:28.0.0'
+    implementation "com.android.support:appcompat-v7:28.0.0"
 
     // node_modules
-    compile "com.facebook.react:react-native:+"
+    implementation "com.facebook.react:react-native:+"
 
     // third party
-    compile "com.aurelhubert:ahbottomnavigation:2.0.6"
-    compile 'com.balysv.materialmenu:material-menu-toolbar:1.5.4'
+    implementation 'com.github.MikeChugunov:ahbottomnavigation:2.1.0.2'
+    implementation 'com.balysv.materialmenu:material-menu-toolbar:1.5.4'
 
     // tests
-    testCompile "junit:junit:4.12"
-    testCompile "org.robolectric:robolectric:3.1.4"
-    testCompile 'org.assertj:assertj-core:2.5.0'
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.robolectric:robolectric:3.1.4"
+    testImplementation 'org.assertj:assertj-core:2.5.0'
 }

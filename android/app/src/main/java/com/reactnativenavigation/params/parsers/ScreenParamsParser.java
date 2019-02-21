@@ -2,6 +2,7 @@ package com.reactnativenavigation.params.parsers;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.reactnativenavigation.params.AppStyle;
 import com.reactnativenavigation.params.NavigationParams;
@@ -55,6 +56,7 @@ public class ScreenParamsParser extends Parser {
 
         result.tabLabel = getTabLabel(params);
         result.tabIcon = new TabIconParser(params).parse();
+        result.tabIconSelected = new TabIconParser(params).parseSelected();
 
         result.animateScreenTransitions = new AnimationParser(params).parse();
         result.sharedElementsTransitions = getSharedElementsTransitions(params);
@@ -82,6 +84,14 @@ public class ScreenParamsParser extends Parser {
             tabIcon = ImageLoader.loadImage(params.getString("icon"));
         }
         return tabIcon;
+    }
+
+    private static Drawable getTabIconSelected(Bundle params) {
+        Drawable tabIconSelected = null;
+        if (hasKey(params, "selectedIcon")) {
+            tabIconSelected = ImageLoader.loadImage(params.getString("selectedIcon"));
+        }
+        return tabIconSelected;
     }
 
     private static String getTabLabel(Bundle params) {

@@ -18,6 +18,7 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.params.AppStyle;
 import com.reactnativenavigation.screens.Screen;

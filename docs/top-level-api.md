@@ -34,7 +34,7 @@ Navigation.startTabBasedApp({
       label: 'One', // tab label as appears under the icon in iOS (optional)
       screen: 'example.FirstTabScreen', // unique ID registered with Navigation.registerScreen
       icon: require('../img/one.png'), // local image asset for the tab icon unselected state (optional on iOS)
-      selectedIcon: require('../img/one_selected.png'), // local image asset for the tab icon selected state (optional, iOS only. On Android, Use `tabBarSelectedButtonColor` instead)
+      selectedIcon: require('../img/one_selected.png'), // local image asset for the tab icon selected state (optional)
       iconInsets: { // add this to change icon position (optional, iOS only).
         top: 6, // optional, default is 0.
         left: 0, // optional, default is 0.

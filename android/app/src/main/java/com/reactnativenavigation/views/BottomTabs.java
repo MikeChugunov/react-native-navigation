@@ -3,9 +3,10 @@ package com.reactnativenavigation.views;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.mikechugunov.ahbottomnavigation.AHBottomNavigation;
+import com.mikechugunov.ahbottomnavigation.AHBottomNavigationItem;
 import com.reactnativenavigation.animation.VisibilityAnimator;
 import com.reactnativenavigation.params.AppStyle;
 import com.reactnativenavigation.params.ScreenParams;
@@ -21,7 +22,7 @@ public class BottomTabs extends AHBottomNavigation {
 
     public BottomTabs(Context context) {
         super(context);
-        setForceTint(true);
+        setForceTint(false);
         setId(ViewUtils.generateViewId());
         createVisibilityAnimator();
         setStyle();
@@ -32,7 +33,10 @@ public class BottomTabs extends AHBottomNavigation {
 
     public void addTabs(List<ScreenParams> params, OnTabSelectedListener onTabSelectedListener) {
         for (ScreenParams screenParams : params) {
-            AHBottomNavigationItem item = new AHBottomNavigationItem(screenParams.tabLabel, screenParams.tabIcon,
+            AHBottomNavigationItem item = new AHBottomNavigationItem(
+                    screenParams.tabLabel,
+                    screenParams.tabIcon,
+                    screenParams.tabIconSelected,
                     Color.GRAY);
             addItem(item);
             setOnTabSelectedListener(onTabSelectedListener);
@@ -65,6 +69,10 @@ public class BottomTabs extends AHBottomNavigation {
 
             if (params.tabIcon != null) {
                 item.setDrawable(params.tabIcon);
+                tabNeedsRefresh = true;
+            }
+            if (params.tabIconSelected != null) {
+                item.setDrawable(params.tabIconSelected);
                 tabNeedsRefresh = true;
             }
             if (params.tabLabel != null) {

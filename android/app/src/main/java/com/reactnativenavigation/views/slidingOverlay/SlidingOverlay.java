@@ -9,9 +9,7 @@ import com.reactnativenavigation.animation.PeekingAnimator;
 import com.reactnativenavigation.params.SlidingOverlayParams;
 import com.reactnativenavigation.params.SlidingOverlayParams.Position;
 import com.reactnativenavigation.screens.Screen;
-import com.reactnativenavigation.utils.ViewUtils;
 import com.reactnativenavigation.views.ContentView;
-import com.reactnativenavigation.views.utils.ViewMeasurer;
 
 public class SlidingOverlay {
 

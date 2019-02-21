@@ -1,20 +1,18 @@
 
 <h1 align="center">
   <img src="./logo.png"/><br>
-  React Native Navigation
+  WIX React Native Navigation v1
 </h1>
 
-[![NPM Version](https://img.shields.io/npm/v/react-native-navigation.svg?style=flat)](https://www.npmjs.com/package/react-native-navigation)
-[![NPM Downloads](https://img.shields.io/npm/dm/react-native-navigation.svg?style=flat)](https://www.npmjs.com/package/react-native-navigation)
-[![Build Status](https://img.shields.io/jenkins/s/http/jenkins-oss.wixpress.com:8080/job/react-native-navigation-master.svg)](https://jenkins-oss.wixpress.com/job/react-native-navigation-master/)
 [![Join us on Discord](https://img.shields.io/badge/discord-react--native--navigation-738bd7.svg?style=flat)](https://discord.gg/DhkZjq2)
 
 ## Important
-We are currently in late stages of development of [v2](https://github.com/wix/react-native-navigation/tree/v2), which is published to npm under `alpha` tag.
+Wix currently moved to [v2](https://github.com/wix/react-native-navigation/tree/v2).
+
+**This repo providing v1 navigation with selectedIcon state for android in bottom tabs layout.**
+
 * New to RNN? We recommend you start with [v2](https://github.com/wix/react-native-navigation/tree/v2).
-* Already using v1? now is the time to migrate your code base to [v2](https://github.com/wix/react-native-navigation/tree/v2), and you can easily do so with a single line of code using the [v1-v2 adapter](https://github.com/wix-playground/react-native-navigation-v1-v2-adapter).
-* [v2 Documentation](https://wix.github.io/react-native-navigation/v2/#/)
-<br><br>Have any questions regarding v2? Join us in [Discord](https://discord.gg/DhkZjq2) #v2 channel.
+* Already using v1? Then you in right place.
 
 <br><br>Latest stable version is `1.1.x` and is published to npm under tag `latest`.
 Version 1.1.483 supports react-native >= 0.48 up to react-native 0.56
@@ -36,7 +34,7 @@ On the right - The example app.
 
 
 ## Quick Links
-* [Documentation](https://wix.github.io/react-native-navigation/#/)
+* [Documentation](https://mikechugunov.github.io/react-native-navigation/#/)
 * [Stack Overflow](http://stackoverflow.com/questions/tagged/react-native-navigation)
 * [Chat with us](https://discord.gg/DhkZjq2)
 * Bootstrap - If you prefer to learn more about the library and the APIs through code, head over to [the bootstrap example app](https://github.com/wix/react-native-navigation-bootstrap) or the more feature rich [JuneDomingo/movieapp](https://github.com/JuneDomingo/movieapp)

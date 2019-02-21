@@ -10,11 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
+import com.mikechugunov.ahbottomnavigation.AHBottomNavigation;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.events.EventBus;
 import com.reactnativenavigation.events.ScreenChangedEvent;
