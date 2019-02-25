@@ -83,7 +83,7 @@ public abstract class Screen extends RelativeLayout implements Subscriber {
         }
         if (ViewPagerScreenChangedEvent.TYPE.equals(event.getType()) && isShown() ) {
             topBar.dismissContextualMenu();
-            topBar.onViewPagerScreenChanged(getScreenParams());
+            topBar.onViewPagerScreenChanged(getBaseScreenParams());
         }
     }
 
@@ -200,7 +200,11 @@ public abstract class Screen extends RelativeLayout implements Subscriber {
 
     public abstract String getNavigatorEventId();
 
-    public BaseScreenParams getScreenParams() {
+    public BaseScreenParams getBaseScreenParams() {
+        return screenParams;
+    }
+
+    public ScreenParams getScreenParams() {
         return screenParams;
     }
 
@@ -261,28 +265,28 @@ public abstract class Screen extends RelativeLayout implements Subscriber {
     public abstract void setOnDisplayListener(OnDisplayListener onContentViewDisplayedListener);
 
     public void show(NavigationType type) {
-        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(getScreenParams(), type);
-        NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(getScreenParams(), type);
+        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(getBaseScreenParams(), type);
+        NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(getBaseScreenParams(), type);
         screenAnimator.show(screenParams.animateScreenTransitions);
     }
 
     public void show(boolean animated, final NavigationType type) {
-        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(getScreenParams(), type);
+        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(getBaseScreenParams(), type);
         screenAnimator.show(animated, new Runnable() {
             @Override
             public void run() {
-                NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(getScreenParams(), type);
+                NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(getBaseScreenParams(), type);
             }
         });
     }
 
     public void show(boolean animated, final Runnable onAnimationEnd, final NavigationType type) {
-        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(getScreenParams(), type);
+        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(getBaseScreenParams(), type);
         setStyle();
         screenAnimator.show(animated, new Runnable() {
             @Override
             public void run() {
-                NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(getScreenParams(), type);
+                NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(getBaseScreenParams(), type);
                 if (onAnimationEnd != null) onAnimationEnd.run();
             }
         });
@@ -331,11 +335,11 @@ public abstract class Screen extends RelativeLayout implements Subscriber {
     }
 
     private void hide(boolean animated, final Runnable onAnimatedEnd, final NavigationType type) {
-        NavigationApplication.instance.getEventEmitter().sendWillDisappearEvent(getScreenParams(), type);
+        NavigationApplication.instance.getEventEmitter().sendWillDisappearEvent(getBaseScreenParams(), type);
         screenAnimator.hide(animated, new Runnable() {
             @Override
             public void run() {
-                NavigationApplication.instance.getEventEmitter().sendDidDisappearEvent(getScreenParams(), type);
+                NavigationApplication.instance.getEventEmitter().sendDidDisappearEvent(getBaseScreenParams(), type);
                 if (onAnimatedEnd != null) onAnimatedEnd.run();
             }
         });

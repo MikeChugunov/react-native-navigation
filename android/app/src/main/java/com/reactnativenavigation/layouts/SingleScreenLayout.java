@@ -123,7 +123,7 @@ public class SingleScreenLayout extends BaseLayout {
 
         if (stack.canPop()) {
             stack.pop(true, System.currentTimeMillis());
-            EventBus.instance.post(new ScreenChangedEvent(stack.peek().getScreenParams()));
+            EventBus.instance.post(new ScreenChangedEvent(stack.peek().getBaseScreenParams()));
             return true;
         } else {
             return false;
@@ -162,7 +162,7 @@ public class SingleScreenLayout extends BaseLayout {
         stack.pop(params.animateScreenTransitions, params.timestamp, new ScreenStack.OnScreenPop() {
             @Override
             public void onScreenPopAnimationEnd() {
-                EventBus.instance.post(new ScreenChangedEvent(stack.peek().getScreenParams()));
+                EventBus.instance.post(new ScreenChangedEvent(stack.peek().getBaseScreenParams()));
             }
         });
     }
@@ -172,7 +172,7 @@ public class SingleScreenLayout extends BaseLayout {
         stack.popToRoot(params.animateScreenTransitions, params.timestamp, new ScreenStack.OnScreenPop() {
             @Override
             public void onScreenPopAnimationEnd() {
-                EventBus.instance.post(new ScreenChangedEvent(stack.peek().getScreenParams()));
+                EventBus.instance.post(new ScreenChangedEvent(stack.peek().getBaseScreenParams()));
             }
         });
     }
@@ -305,10 +305,10 @@ public class SingleScreenLayout extends BaseLayout {
     @Override
     public void onModalDismissed() {
         stack.peek().setStyle();
-        stack.peek().getScreenParams().timestamp = System.currentTimeMillis();
-        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(stack.peek().getScreenParams(), NavigationType.DismissModal);
-        NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(stack.peek().getScreenParams(), NavigationType.DismissModal);
-        EventBus.instance.post(new ScreenChangedEvent(stack.peek().getScreenParams()));
+        stack.peek().getBaseScreenParams().timestamp = System.currentTimeMillis();
+        NavigationApplication.instance.getEventEmitter().sendWillAppearEvent(stack.peek().getBaseScreenParams(), NavigationType.DismissModal);
+        NavigationApplication.instance.getEventEmitter().sendDidAppearEvent(stack.peek().getBaseScreenParams(), NavigationType.DismissModal);
+        EventBus.instance.post(new ScreenChangedEvent(stack.peek().getBaseScreenParams()));
     }
 
     @Override

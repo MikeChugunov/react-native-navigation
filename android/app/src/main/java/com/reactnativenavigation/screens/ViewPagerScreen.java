@@ -30,7 +30,7 @@ public class ViewPagerScreen extends Screen {
     }
 
     @Override
-    public BaseScreenParams getScreenParams() {
+    public BaseScreenParams getBaseScreenParams() {
         return screenParams.topTabParams.get(getCurrentItem());
     }
 
@@ -42,7 +42,7 @@ public class ViewPagerScreen extends Screen {
     @Override
     public void setFab(FabParams fabParams) {
         super.setFab(fabParams);
-        getScreenParams().fabParams = fabParams;
+        getBaseScreenParams().fabParams = fabParams;
     }
 
     @Override

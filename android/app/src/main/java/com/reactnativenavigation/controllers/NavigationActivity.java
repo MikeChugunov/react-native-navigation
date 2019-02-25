@@ -270,8 +270,6 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
     void popToRoot(ScreenParams params) {
         if (modalController.containsNavigator(params.getNavigatorId())) {
             modalController.popToRoot(params);
-        } else {
-            layout.popToRoot(params);
         }
     }
 
@@ -285,8 +283,8 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
 
     void showModal(ScreenParams screenParams) {
         Screen previousScreen = layout.getCurrentScreen();
-        NavigationApplication.instance.getEventEmitter().sendWillDisappearEvent(previousScreen.getScreenParams(), NavigationType.ShowModal);
-        NavigationApplication.instance.getEventEmitter().sendDidDisappearEvent(previousScreen.getScreenParams(), NavigationType.ShowModal);
+        NavigationApplication.instance.getEventEmitter().sendWillDisappearEvent(previousScreen.getBaseScreenParams(), NavigationType.ShowModal);
+        NavigationApplication.instance.getEventEmitter().sendDidDisappearEvent(previousScreen.getBaseScreenParams(), NavigationType.ShowModal);
         modalController.showModal(screenParams);
     }
 
