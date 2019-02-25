@@ -14,12 +14,15 @@ Wix currently moved to [v2](https://github.com/wix/react-native-navigation/tree/
 * New to RNN? We recommend you start with [v2](https://github.com/wix/react-native-navigation/tree/v2).
 * Already using v1? Then you in right place.
 
-## Newest version 1.2.2 [Changelog](https://github.com/mikechugunov/react-native-navigation/blob/master/CHANGELOG.md)
+## Newest version 1.2.3 [Changelog](https://github.com/mikechugunov/react-native-navigation/blob/master/CHANGELOG.md)
+* add types
+
+## 1.2.2 [Changelog](https://github.com/mikechugunov/react-native-navigation/blob/master/CHANGELOG.md)
 * Fix pop() was opening screen from previous screenStack (from other tab)
 
 <br><br>Latest stable version is `1.2.x` and is published to npm under tag `latest`.
 Version 1.1.483 supports react-native >= 0.48 up to react-native 0.56
-Version 1.2.x supports react-native >= 0.57 
+Version 1.2.x supports react-native >= 0.57
 >⚠️Since we're focusing our efforts on v2, we are not accepting pull requests for v1 and are not addresing issues for v1.
 
 ### tl;dr
