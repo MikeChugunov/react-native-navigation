@@ -1,5 +1,8 @@
 ## Changelog
 
+### Newest version: 1.2.4
+* fix android tap on same tab
+
 ### Newest version: 1.2.3
 * add types
 
