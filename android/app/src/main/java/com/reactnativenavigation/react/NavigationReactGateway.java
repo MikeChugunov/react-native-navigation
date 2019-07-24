@@ -12,7 +12,7 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.bridge.NavigationReactEventEmitter;
-import com.reactnativenavigation.bridge.NavigationReactPackage;
+import com.reactnativenavigation.NavigationReactPackage;
 import com.reactnativenavigation.events.EventBus;
 import com.reactnativenavigation.events.JsDevReloadEvent;
 

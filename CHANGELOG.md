@@ -1,9 +1,12 @@
 ## Changelog
 
-### Newest version: 1.2.4
+### Newest version: 1.3.0
+* fix android package location for autolinking with RN 0.60
+
+### 1.2.4
 * fix android tap on same tab
 
-### Newest version: 1.2.3
+### 1.2.3
 * add types
 
 ### 1.2.2
