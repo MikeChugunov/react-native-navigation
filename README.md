@@ -14,7 +14,8 @@ Wix currently moved to [v2](https://github.com/wix/react-native-navigation/tree/
 * New to RNN? We recommend you start with [v2](https://github.com/wix/react-native-navigation/tree/v2).
 * Already using v1? Then you in right place.
 
-## Newest version 1.3.0 [Changelog](https://github.com/mikechugunov/react-native-navigation/blob/master/CHANGELOG.md)
+## Newest version 1.3.1 [Changelog](https://github.com/mikechugunov/react-native-navigation/blob/master/CHANGELOG.md)
+* package config update
 * fix android package location for autolinking with RN 0.60
 
 <br><br>Latest stable version is `1.3.x` and is published to npm under tag `latest`.  

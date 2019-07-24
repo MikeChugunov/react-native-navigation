@@ -1,6 +1,9 @@
 ## Changelog
 
-### Newest version: 1.3.0
+### Newest version: 1.3.1
+* package config update
+
+### 1.3.0
 * fix android package location for autolinking with RN 0.60
 
 ### 1.2.4
