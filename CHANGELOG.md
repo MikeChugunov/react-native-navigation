@@ -1,6 +1,9 @@
 ## Changelog
 
-### Newest version: 1.3.1
+### Newest version: 1.3.2
+* hotfix package
+
+### 1.3.1
 * package config update
 
 ### 1.3.0
