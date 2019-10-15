@@ -1,6 +1,10 @@
 ## Changelog
 
-### Newest version: 1.3.2
+### Newest version: 1.3.3
+* fix android navigation issues: disable tab change while pushed screen is still not opened 
+* android lambda support
+
+### 1.3.2
 * hotfix package
 
 ### 1.3.1

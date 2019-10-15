@@ -103,12 +103,12 @@ public class ScreenStack {
         if (!stack.empty()) parent.removeView(peek());
     }
 
-    public void push(final ScreenParams params, LayoutParams layoutParams, Promise onPushComplete) {
+    public void push(final ScreenParams params, LayoutParams layoutParams, Promise onPushComplete, @Nullable Screen.OnDisplayListener onDisplay) {
         Screen nextScreen = ScreenFactory.create(activity, params, leftButtonOnClickListener);
         final Screen previousScreen = stack.peek();
         if (isStackVisible) {
             if (nextScreen.screenParams.sharedElementsTransitions.isEmpty()) {
-                pushScreenToVisibleStack(layoutParams, nextScreen, previousScreen, onPushComplete);
+                pushScreenToVisibleStack(layoutParams, nextScreen, previousScreen, onPushComplete, onDisplay);
             } else {
                 pushScreenToVisibleStackWithSharedElementTransition(layoutParams, nextScreen, previousScreen, onPushComplete);
             }
@@ -138,6 +138,7 @@ public class ScreenStack {
                     public void run() {
                         if (onDisplay != null) onDisplay.onDisplay();
                         if (onPushComplete != null) onPushComplete.resolve(null);
+                        Log.d("RNNAVIGATION", "nextScreen onPushComplete " + nextScreen);
                         NavigationApplication.instance.getEventEmitter().sendDidDisappearEvent(previousScreen.getBaseScreenParams(), NavigationType.Push);
                         parent.removeView(previousScreen);
                     }

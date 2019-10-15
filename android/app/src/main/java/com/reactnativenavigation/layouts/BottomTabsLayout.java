@@ -63,6 +63,7 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
     SideMenu sideMenu;
     private int currentStackIndex = 0;
     private LightBox lightBox;
+    private boolean isScreenChanging;
 
     public BottomTabsLayout(AppCompatActivity activity, ActivityParams params) {
         super(activity);
@@ -70,6 +71,7 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
         leftSideMenuParams = params.leftSideMenuParams;
         rightSideMenuParams = params.rightSideMenuParams;
         screenStacks = new ScreenStack[params.tabParams.size()];
+        this.isScreenChanging = false;
         createLayout();
     }
 
@@ -378,64 +380,45 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
 
     @Override
     public void push(final ScreenParams params, final Promise onPushComplete) {
-        performOnStack(params.getNavigatorId(), new Task<ScreenStack>() {
-            @Override
-            public void run(ScreenStack screenStack) {
-                screenStack.push(params, createScreenLayoutParams(params), onPushComplete);
-                if (isCurrentStack(screenStack)) {
-                    setStyleFromScreen(params.styleParams);
-                    EventBus.instance.post(new ScreenChangedEvent(params));
-                }
+        performOnStack(params.getNavigatorId(), screenStack -> {
+            this.isScreenChanging = true;
+            screenStack.push(params, createScreenLayoutParams(params), onPushComplete, () -> {
+                this.isScreenChanging = false;
+            });
+            if (isCurrentStack(screenStack)) {
+                setStyleFromScreen(params.styleParams);
+                EventBus.instance.post(new ScreenChangedEvent(params));
             }
         }, onPushComplete);
     }
 
     @Override
     public void pop(final ScreenParams params) {
-        performOnStack(params.getNavigatorId(), new Task<ScreenStack>() {
-            @Override
-            public void run(ScreenStack stack) {
-            stack.pop(params.animateScreenTransitions, params.timestamp, new ScreenStack.OnScreenPop() {
-                    @Override
-                    public void onScreenPopAnimationEnd() {
-                        setBottomTabsStyleFromCurrentScreen();
-                        EventBus.instance.post(new ScreenChangedEvent(getCurrentScreenStack().peek().getBaseScreenParams()));
-                    }
-                });
-            }
-        });
+        performOnStack(params.getNavigatorId(), stack -> stack.pop(params.animateScreenTransitions, params.timestamp, () -> {
+            setBottomTabsStyleFromCurrentScreen();
+            EventBus.instance.post(new ScreenChangedEvent(getCurrentScreenStack().peek().getBaseScreenParams()));
+        }));
     }
 
     @Override
     public void popToRoot(final ScreenParams params) {
-        performOnStack(params.getNavigatorId(), new Task<ScreenStack>() {
-            @Override
-            public void run(final ScreenStack stack) {
-                stack.popToRoot(params.animateScreenTransitions, params.timestamp, new ScreenStack.OnScreenPop() {
-                    @Override
-                    public void onScreenPopAnimationEnd() {
-                        if (isCurrentStack(stack)) {
-                            setBottomTabsStyleFromCurrentScreen();
-                            alignSnackbarContainerWithBottomTabs((LayoutParams) snackbarAndFabContainer.getLayoutParams(), params.styleParams);
-                            EventBus.instance.post(new ScreenChangedEvent(stack.peek().getBaseScreenParams()));
-                        }
-                    }
-                });
+        performOnStack(params.getNavigatorId(), stack -> stack.popToRoot(params.animateScreenTransitions, params.timestamp, () -> {
+            if (isCurrentStack(stack)) {
+                setBottomTabsStyleFromCurrentScreen();
+                alignSnackbarContainerWithBottomTabs((LayoutParams) snackbarAndFabContainer.getLayoutParams(), params.styleParams);
+                EventBus.instance.post(new ScreenChangedEvent(stack.peek().getBaseScreenParams()));
             }
-        });
+        }));
     }
 
     @Override
     public void newStack(final ScreenParams params) {
-        performOnStack(params.getNavigatorId(), new Task<ScreenStack>() {
-            @Override
-            public void run(ScreenStack screenStack) {
-                screenStack.newStack(params, createScreenLayoutParams(params));
-                if (isCurrentStack(screenStack)) {
-                    setStyleFromScreen(params.styleParams);
-                    alignSnackbarContainerWithBottomTabs((LayoutParams) snackbarAndFabContainer.getLayoutParams(), params.styleParams);
-                    EventBus.instance.post(new ScreenChangedEvent(params));
-                }
+        performOnStack(params.getNavigatorId(), screenStack -> {
+            screenStack.newStack(params, createScreenLayoutParams(params));
+            if (isCurrentStack(screenStack)) {
+                setStyleFromScreen(params.styleParams);
+                alignSnackbarContainerWithBottomTabs((LayoutParams) snackbarAndFabContainer.getLayoutParams(), params.styleParams);
+                EventBus.instance.post(new ScreenChangedEvent(params));
             }
         });
     }
@@ -486,12 +469,16 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
 
     @Override
     public boolean onTabSelected(int position, boolean wasSelected) {
-        final int unselectedTabIndex = currentStackIndex;
-        popToRoot(getCurrentScreen().getScreenParams());
-        sendTabSelectedEventToJs(position, unselectedTabIndex);
-        switchTab(position, NavigationType.BottomTabSelected);
-        clearCurrentStack();
-        return true;
+        if (!this.isScreenChanging) {
+            final int unselectedTabIndex = currentStackIndex;
+            popToRoot(getCurrentScreen().getScreenParams());
+            clearCurrentStack();
+            switchTab(position, NavigationType.BottomTabSelected);
+            sendTabSelectedEventToJs(position, unselectedTabIndex);
+            return true;
+        }
+
+        return false;
     }
 
     private void switchTab(int position, NavigationType navigationType) {
